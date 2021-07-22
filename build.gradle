@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+group 'net.choco'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot:1.17-R0.1-SNAPSHOT'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    compile "me.mattstudios.utils:matt-framework:1.4"
+}
+
+shadowJar {
+    relocate 'me.mattstudios.mf', 'net.choco.playerping.mf'
+}
+
+test {
+    useJUnitPlatform()
+}
